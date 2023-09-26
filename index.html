@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Booking Calendar</h1>
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+      <!-- Calendar will be populated here -->
+    </tbody>
+  </table>
+  <div id="event-form" class="event-form" style="display: none;">
+    <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+    <input type="text" id="event-name" placeholder="Event Name">
+    <input type="time" id="event-start-time" placeholder="Start Time">
+    <input type="time" id="event-end-time" placeholder="End Time">
+    <input type="color" id="event-color">
+    <textarea id="event-description" placeholder="Description"></textarea>
+    <button onclick="saveEvent()">Save</button>
+    <button onclick="discardEvent()">Discard</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    background-color: #4285f4;
+    color: white;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+}
+
+.calendar {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+}
+
+.calendar th,
+.calendar td {
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 14%;
+    height: 100px;
+    position: relative;
+}
+
+.calendar th {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+.event-form {
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;    background-color: #fff;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+}
+
+#event-form input,
+#event-form textarea,
+#event-form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#event-form button {
+    background-color: #4285f4;
+    color: white;
+    cursor: pointer;
+}
+
+#event-form button:hover {
+    background-color: #3173d6;
+}
+
+.calendar-row {
+    display: flex;
+}
+
+.calendar-cell {
+    flex: 1;
+}
