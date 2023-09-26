@@ -5,9 +5,10 @@ const events = {};
 
   const fetchEvents = () => {
       $.ajax({
-        url: "/get_events",
+        url: "http://localhost:5000/get_events", // Added in the proper link for events cause I'm stupid lol
         type: "GET",
         success: function(response) {
+          console.log(response);
           response.forEach(event => {
             const day = event[0];
             if (!events[day]) {
