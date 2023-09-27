@@ -42,7 +42,99 @@
 <!-- /index.html -->
 
 <!-- styles.css -->
-SASSAFRASs
+/* 9/26/23 rolled back to earlier draft */
+ 
+  * {
+    box-sizing: border-box;
+  }
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #4285f4;
+    color: white;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .calendar {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+  }
+  
+  .calendar th,
+  .calendar td {
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 14%;
+    height: 100px;
+    position: relative;
+  }
+  
+  .calendar th {
+    background-color: #f1f1f1;
+    padding: 10px;
+    background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
+  }
+  
+  .calendar .weekend {
+    background-color: #f9f9f9;
+  }
+  
+  .calendar td:hover {
+    background-color: rgba(66, 133, 244, 0.1);
+    cursor: pointer;
+  }
+  
+  .calendar td.active {
+    background-color: #4285f4;
+    color: white;
+  }
+
+  
+  
+  .event {
+    font-size: 12px;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    width: 100%;  /* Constrain width to cell */
+    overflow: hidden;  /* Hide overflow */
+    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+}
+
+  
+  .event * {
+    pointer-events: none;
+  }
+  .event:empty {
+    display: none;
+  }
+  
+
+  .calendar th .weekday-name {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+.day {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px;
+  margin: 0;
+}
 <!-- /styles.css -->
 
 <!-- script.js -->
@@ -279,5 +371,5 @@ if __name__ == '__main__':
                  (day integer, name text, startTime text, endTime text, description text, color text)''')
     conn.commit()
     conn.close()
-    app.run(debug=True) BOOOTY
+    app.run(debug=True) 
 <!-- /eventdb.py -->

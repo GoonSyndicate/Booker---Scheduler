@@ -1,2 +1,6 @@
 events.db
 .env
+rollback
+__pycache__
+
+.pytest_cache
