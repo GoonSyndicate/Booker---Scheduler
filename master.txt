@@ -43,97 +43,92 @@
 
 <!-- styles.css -->
 /* 9/26/23 rolled back to earlier draft */
- 
-  * {
-    box-sizing: border-box;
-  }
-  
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    background-color: #4285f4;
-    color: white;
-    margin: 0;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  .calendar {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-  }
-  
-  .calendar th,
-  .calendar td {
-    border: 1px solid #ccc;
-    text-align: center;
-    width: 14%;
-    height: 100px;
-    position: relative;
-  }
-  
-  .calendar th {
-    background-color: #f1f1f1;
-    padding: 10px;
-    background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
-  }
-  
-  .calendar .weekend {
-    background-color: #f9f9f9;
-  }
-  
-  .calendar td:hover {
-    background-color: rgba(66, 133, 244, 0.1);
-    cursor: pointer;
-  }
-  
-  .calendar td.active {
-    background-color: #4285f4;
-    color: white;
-  }
 
-  
-  
-  .event {
-    font-size: 12px;
-    bottom: 5px;
-    left: 5px;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    white-space: nowrap;
-    width: 100%;  /* Constrain width to cell */
-    overflow: hidden;  /* Hide overflow */
-    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+* {
+  box-sizing: border-box;
 }
 
-  
-  .event * {
-    pointer-events: none;
-  }
-  .event:empty {
-    display: none;
-  }
-  
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
 
-  .calendar th .weekday-name {
-    text-align: center;
-    vertical-align: middle;
-  }
+h1 {
+  background-color: #4285f4;
+  color: white;
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+}
+
+.calendar {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+}
+
+.calendar th {
+  background-color: #f1f1f1;
+  padding: 10px;
+  background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
+}
+
+.calendar .weekend {
+  background-color: #f9f9f9;
+}
+
+.calendar td:hover {
+  background-color: rgba(66, 133, 244, 0.1);
+  cursor: pointer;
+}
+
+.calendar td.active {
+  background-color: #4285f4;
+  color: white;
+}
+
+.cell-wrapper {
+  width: 100%;
+  height: 100px;  /* Make this the same as .calendar td height */
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .day {
-  text-align: left;
-  vertical-align: top;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+}
+
+.event {
+  position: relative;
+  top: 25px;
+  font-size: 12px;
+  color: white;
   padding: 5px;
-  margin: 0;
+  border-radius: 5px;
+  white-space: nowrap;
+  max-width: 100%;
+  max-height: 100px;  /* Make this the same as .calendar td height */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar td {
+  border: 1px solid #ccc;
+  text-align: left;
+  width: 100px;
+  height: 100px;  /* This height will be the default size of the day cell */
+  position: relative;
+}
+
+.event:hover {
+  outline: 2px solid #4285f4;
 }
 <!-- /styles.css -->
 
@@ -172,45 +167,63 @@ const events = {};
       fetchEvents();
     });
 
-    const generateCalendar = (year = currentYear, month = currentMonth) => {  
-      const tbody = document.getElementById("calendar-body");  
-      tbody.innerHTML = "";  
-      const firstDay = new Date(year, month, 1).getDay();  
-      const daysInMonth = new Date(year, month + 1, 0).getDate();  
-      for (let i = 0; i < 5; i++) {  
-        const row = document.createElement("tr");  
-        for (let j = 0; j < 7; j++) {  
-          const cell = document.createElement("td");  
-          const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();  
-          if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {  
-            cell.innerHTML = "";  
-          } else {  
-            cell.innerHTML = `<div class="day">${currentDay}</div>`;  
-            cell.onclick = () => selectDate(currentDay);  
-            if (events[currentDay]) {  
-              events[currentDay].forEach((event, index) => {  
-                const eventDiv = document.createElement("div");  
-                eventDiv.className = "event";  
-                eventDiv.style.backgroundColor = event.color;  
-                eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;  
-                eventDiv.title = event.description;  
-                eventDiv.onclick = (e) => {  
-                  e.stopPropagation();  
-                  editEvent(currentDay, index);  
-                };  
-                cell.appendChild(eventDiv);  
-              });  
-            }  
-          }  
-          if (j === 0 || j === 6) {  
-            cell.classList.add("weekend");  
-          }  
-          row.appendChild(cell);  
-        }  
-        tbody.appendChild(row);  
-      }  
-      document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;  
-    };  
+    const generateCalendar = (year = currentYear, month = currentMonth) => {
+        const tbody = document.getElementById("calendar-body");
+        tbody.innerHTML = "";
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        for (let i = 0; i < 5; i++) {
+            const row = document.createElement("tr");
+            
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("td");
+                const cellWrapper = document.createElement("div");
+                cellWrapper.className = "cell-wrapper";
+                
+                const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();
+                
+                // Check if the day is within the current month
+                if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {
+                    cellWrapper.innerHTML = "";
+                } else {
+                    const dayDiv = document.createElement("div");
+                    dayDiv.className = "day";
+                    dayDiv.innerHTML = currentDay;
+                    cellWrapper.appendChild(dayDiv);
+                    
+                    cell.onclick = () => selectDate(currentDay);
+                    
+                    if (events[currentDay]) {
+                        events[currentDay].forEach((event, index) => {
+                            const eventDiv = document.createElement("div");
+                            eventDiv.className = "event";
+                            eventDiv.style.backgroundColor = event.color;
+                            eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;
+                            eventDiv.title = event.description;
+                            eventDiv.onclick = (e) => {
+                                e.stopPropagation();
+                                editEvent(currentDay, index);
+                            };
+                            cellWrapper.appendChild(eventDiv);
+                        });
+                    }
+                }
+                
+                if (j === 0 || j === 6) {
+                    cell.classList.add("weekend");
+            }
+            
+            cell.appendChild(cellWrapper);
+            row.appendChild(cell);
+            }
+            
+            tbody.appendChild(row);
+        }
+        
+        document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+    };
+
   
     const generateWeekView = (day) => {  
       const weekView = document.getElementById("week-view");  
@@ -359,10 +372,11 @@ def add_event():
 def get_events():
     conn = sqlite3.connect('events.db')
     c = conn.cursor()
-    c.execute("SELECT * FROM events")
+    c.execute("SELECT day, name, startTime, endTime, description, color FROM events")
     events = c.fetchall()
     conn.close()
     return jsonify(events)
+
 
 if __name__ == '__main__':
     conn = sqlite3.connect('events.db', check_same_thread=False)
@@ -371,5 +385,5 @@ if __name__ == '__main__':
                  (day integer, name text, startTime text, endTime text, description text, color text)''')
     conn.commit()
     conn.close()
-    app.run(debug=True) 
+    app.run(debug=True)
 <!-- /eventdb.py -->

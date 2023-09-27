@@ -32,45 +32,63 @@ const events = {};
       fetchEvents();
     });
 
-    const generateCalendar = (year = currentYear, month = currentMonth) => {  
-      const tbody = document.getElementById("calendar-body");  
-      tbody.innerHTML = "";  
-      const firstDay = new Date(year, month, 1).getDay();  
-      const daysInMonth = new Date(year, month + 1, 0).getDate();  
-      for (let i = 0; i < 5; i++) {  
-        const row = document.createElement("tr");  
-        for (let j = 0; j < 7; j++) {  
-          const cell = document.createElement("td");  
-          const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();  
-          if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {  
-            cell.innerHTML = "";  
-          } else {  
-            cell.innerHTML = `<div class="day">${currentDay}</div>`;  
-            cell.onclick = () => selectDate(currentDay);  
-            if (events[currentDay]) {  
-              events[currentDay].forEach((event, index) => {  
-                const eventDiv = document.createElement("div");  
-                eventDiv.className = "event";  
-                eventDiv.style.backgroundColor = event.color;  
-                eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;  
-                eventDiv.title = event.description;  
-                eventDiv.onclick = (e) => {  
-                  e.stopPropagation();  
-                  editEvent(currentDay, index);  
-                };  
-                cell.appendChild(eventDiv);  
-              });  
-            }  
-          }  
-          if (j === 0 || j === 6) {  
-            cell.classList.add("weekend");  
-          }  
-          row.appendChild(cell);  
-        }  
-        tbody.appendChild(row);  
-      }  
-      document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;  
-    };  
+    const generateCalendar = (year = currentYear, month = currentMonth) => {
+        const tbody = document.getElementById("calendar-body");
+        tbody.innerHTML = "";
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        for (let i = 0; i < 5; i++) {
+            const row = document.createElement("tr");
+            
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("td");
+                const cellWrapper = document.createElement("div");
+                cellWrapper.className = "cell-wrapper";
+                
+                const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();
+                
+                // Check if the day is within the current month
+                if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {
+                    cellWrapper.innerHTML = "";
+                } else {
+                    const dayDiv = document.createElement("div");
+                    dayDiv.className = "day";
+                    dayDiv.innerHTML = currentDay;
+                    cellWrapper.appendChild(dayDiv);
+                    
+                    cell.onclick = () => selectDate(currentDay);
+                    
+                    if (events[currentDay]) {
+                        events[currentDay].forEach((event, index) => {
+                            const eventDiv = document.createElement("div");
+                            eventDiv.className = "event";
+                            eventDiv.style.backgroundColor = event.color;
+                            eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;
+                            eventDiv.title = event.description;
+                            eventDiv.onclick = (e) => {
+                                e.stopPropagation();
+                                editEvent(currentDay, index);
+                            };
+                            cellWrapper.appendChild(eventDiv);
+                        });
+                    }
+                }
+                
+                if (j === 0 || j === 6) {
+                    cell.classList.add("weekend");
+            }
+            
+            cell.appendChild(cellWrapper);
+            row.appendChild(cell);
+            }
+            
+            tbody.appendChild(row);
+        }
+        
+        document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+    };
+
   
     const generateWeekView = (day) => {  
       const weekView = document.getElementById("week-view");  
