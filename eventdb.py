@@ -40,4 +40,4 @@ if __name__ == '__main__':
                  (day integer, name text, startTime text, endTime text, description text, color text)''')
     conn.commit()
     conn.close()
-    app.run(debug=True) BOOOTY
+    app.run(debug=True) 
