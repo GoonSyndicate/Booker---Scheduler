@@ -28,10 +28,11 @@ def add_event():
 def get_events():
     conn = sqlite3.connect('events.db')
     c = conn.cursor()
-    c.execute("SELECT * FROM events")
+    c.execute("SELECT day, name, startTime, endTime, description, color FROM events")
     events = c.fetchall()
     conn.close()
     return jsonify(events)
+
 
 if __name__ == '__main__':
     conn = sqlite3.connect('events.db', check_same_thread=False)
@@ -40,4 +41,4 @@ if __name__ == '__main__':
                  (day integer, name text, startTime text, endTime text, description text, color text)''')
     conn.commit()
     conn.close()
-    app.run(debug=True) 
+    app.run(debug=True)

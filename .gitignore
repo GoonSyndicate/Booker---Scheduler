@@ -2,5 +2,5 @@ events.db
 .env
 rollback
 __pycache__
-
+.master.txt
 .pytest_cache
