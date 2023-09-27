@@ -1,0 +1,755 @@
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Booking Calendar</h1>
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+      <!-- Calendar will be populated here -->
+    </tbody>
+  </table>
+  <div id="event-form" class="event-form" style="display: none;">
+    <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+    <input type="text" id="event-name" placeholder="Event Name">
+    <input type="time" id="event-start-time" placeholder="Start Time">
+    <input type="time" id="event-end-time" placeholder="End Time">
+    <input type="color" id="event-color">
+    <textarea id="event-description" placeholder="Description"></textarea>
+    <button onclick="saveEvent()">Save</button>
+    <button onclick="discardEvent()">Discard</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+<!-- /index.html -->
+
+<!-- styles.css -->
+
+/* 9/26/23 rolled back to earlier draft */
+ 
+  * {
+    box-sizing: border-box;
+  }
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #4285f4;
+    color: white;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .calendar {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+  }
+  
+  .calendar th,
+  .calendar td {
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 14%;
+    height: 100px;
+    position: relative;
+  }
+  
+  .calendar th {
+    background-color: #f1f1f1;
+    padding: 10px;
+    background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
+  }
+  
+  .calendar .weekend {
+    background-color: #f9f9f9;
+  }
+  
+  .calendar td:hover {
+    background-color: rgba(66, 133, 244, 0.1);
+    cursor: pointer;
+  }
+  
+  .calendar td.active {
+    background-color: #4285f4;
+    color: white;
+  }
+
+  
+  
+  .event {
+    font-size: 12px;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    width: 100%;  /* Constrain width to cell */
+    overflow: hidden;  /* Hide overflow */
+    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+}
+
+  
+  .event * {
+    pointer-events: none;
+  }
+  .event:empty {
+    display: none;
+  }
+  
+
+  .calendar th .weekday-name {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+.day {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px;
+  margin: 0;
+}
+
+<!-- /styles.css -->
+
+<!-- script.js -->
+const events = {};  
+    const today = new Date();  
+    const currentYear = today.getFullYear();  
+    const currentMonth = today.getMonth();  
+
+  const fetchEvents = () => {
+      $.ajax({
+        url: "http://localhost:5000/get_events", // Added in the proper link for events cause I'm stupid lol
+        type: "GET",
+        success: function(response) {
+          console.log(response);
+          response.forEach(event => {
+            const day = event[0];
+            if (!events[day]) {
+              events[day] = [];
+            }
+            events[day].push({
+              name: event[1],
+              startTime: event[2],
+              endTime: event[3],
+              description: event[4],
+              color: event[5]
+            });
+          });
+          generateCalendar();
+        }
+      });
+    };
+
+    // Call fetchEvents function when the page loads
+    $(document).ready(function() {
+      fetchEvents();
+    });
+
+    const generateCalendar = (year = currentYear, month = currentMonth) => {  
+      const tbody = document.getElementById("calendar-body");  
+      tbody.innerHTML = "";  
+      const firstDay = new Date(year, month, 1).getDay();  
+      const daysInMonth = new Date(year, month + 1, 0).getDate();  
+      for (let i = 0; i < 5; i++) {  
+        const row = document.createElement("tr");  
+        for (let j = 0; j < 7; j++) {  
+          const cell = document.createElement("td");  
+          const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();  
+          if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {  
+            cell.innerHTML = "";  
+          } else {  
+            cell.innerHTML = `<div class="day">${currentDay}</div>`;  
+            cell.onclick = () => selectDate(currentDay);  
+            if (events[currentDay]) {  
+              events[currentDay].forEach((event, index) => {  
+                const eventDiv = document.createElement("div");  
+                eventDiv.className = "event";  
+                eventDiv.style.backgroundColor = event.color;  
+                eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;  
+                eventDiv.title = event.description;  
+                eventDiv.onclick = (e) => {  
+                  e.stopPropagation();  
+                  editEvent(currentDay, index);  
+                };  
+                cell.appendChild(eventDiv);  
+              });  
+            }  
+          }  
+          if (j === 0 || j === 6) {  
+            cell.classList.add("weekend");  
+          }  
+          row.appendChild(cell);  
+        }  
+        tbody.appendChild(row);  
+      }  
+      document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;  
+    };  
+  
+    const generateWeekView = (day) => {  
+      const weekView = document.getElementById("week-view");  
+      weekView.innerHTML = "";  
+      for (let i = 0; i < 7; i++) {  
+        const dayDiv = document.createElement("div");  
+        dayDiv.className = "day";  
+        for (let j = 0; j < 24; j++) {  
+          const hourDiv = document.createElement("div");  
+          hourDiv.className = "hour";  
+          hourDiv.dataset.hour = `${j}:00`;  
+          dayDiv.appendChild(hourDiv);  
+        }  
+        weekView.appendChild(dayDiv);  
+      }  
+      weekView.style.display = "flex";  
+    };  
+
+    const selectDate = (day) => {  
+      document.getElementById('form-date').innerText = `${new Date(currentYear, currentMonth, day).toLocaleString('default', { month: 'long' })} ${day}, ${currentYear}`;  
+      document.getElementById('event-form').style.display = 'block';  
+      document.getElementById('event-form').dataset.day = day;  
+      document.getElementById('event-form').dataset.index = -1;  // For new events  
+      document.getElementById('form-title').textContent = 'Add Event';
+    generateWeekView(day);  
+  }; 
+  
+    
+
+    const editEvent = (day, index) => {  
+      const event = events[day][index];  
+      document.getElementById('form-date').innerText = `${new Date(currentYear, currentMonth, day).toLocaleString('default', { month: 'long' })} ${day}, ${currentYear}`;  
+      document.getElementById('event-form').style.display = 'block';  
+      document.getElementById('event-form').dataset.day = day;  
+      document.getElementById('event-form').dataset.index = index;  
+      document.getElementById('event-name').value = event.name;  
+      document.getElementById('event-start-time').value = event.startTime;  
+      document.getElementById('event-end-time').value = event.endTime;  
+      document.getElementById('event-color').value = event.color;  
+      document.getElementById('event-description').value = event.description;  
+      document.getElementById('form-title').textContent = 'Edit Event';
+  }; 
+    
+  
+  const saveEvent = () => {
+    console.log("Save button clicked");
+    const day = document.getElementById('event-form').dataset.day;
+    const name = document.getElementById('event-name').value;
+    const startTime = document.getElementById('event-start-time').value;
+    const endTime = document.getElementById('event-end-time').value;
+    const description = document.getElementById('event-description').value;
+    const color = document.getElementById('event-color').value;
+
+    $.ajax({
+      url: "http://localhost:5000/add_event",
+      type: "POST",
+      dataType: "json",
+      data: JSON.stringify({
+        day,
+        name,
+        startTime,
+        endTime,
+        description,
+        color,
+      }),
+      contentType: "application/json; charset=utf-8",
+      success: function (response) {
+        generateCalendar();
+        discardEvent();
+      },
+    });
+  };
+  
+    const discardEvent = () => {  
+      console.log("Discard button clicked");
+      document.getElementById('event-form').style.display = 'none';  
+      document.getElementById('event-name').value = 'Sample Event';  
+      document.getElementById('event-start-time').value = '12:00';  
+      document.getElementById('event-end-time').value = '13:00';  
+      document.getElementById('event-color').value = '#4285f4';  
+      document.getElementById('event-description').value = 'Sample Description';  
+    };  
+  
+
+      
+  // Call fetchEvents function when the page loads
+  $(document).ready(function() {
+    fetchEvents();
+  });
+
+  // Initialize the calendar
+  $(document).ready(function () {
+    generateCalendar();
+
+    $.ajax({
+      url: "http://localhost:5000/get_events",
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        response.forEach(function (event) {
+          if (!events[event[1]]) {
+            events[event[1]] = [];
+          }
+          events[event[1]].push({
+            name: event[2],
+            startTime: event[3],
+            endTime: event[4],
+            description: event[5],
+            color: event[6],
+          });
+        });
+        generateCalendar();
+      },
+    });
+  });
+
+<!-- /script.js -->
+
+<!-- eventdb.py -->
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/add_event', methods=['POST'])
+def add_event():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    data = request.json
+    day = data['day']
+    name = data['name']
+    startTime = data['startTime']
+    endTime = data['endTime']
+    description = data['description']
+    color = data['color']
+    
+    c.execute("INSERT INTO events (day, name, startTime, endTime, description, color) VALUES (?, ?, ?, ?, ?, ?)",
+              (day, name, startTime, endTime, description, color))
+    
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "success"})
+
+@app.route('/get_events', methods=['GET'])
+def get_events():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM events")
+    events = c.fetchall()
+    conn.close()
+    return jsonify(events)
+
+if __name__ == '__main__':
+    conn = sqlite3.connect('events.db', check_same_thread=False)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS events
+                 (day integer, name text, startTime text, endTime text, description text, color text)''')
+    conn.commit()
+    conn.close()
+    app.run(debug=True)
+
+<!-- /eventdb.py -->
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Booking Calendar</h1>
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+      <!-- Calendar will be populated here -->
+    </tbody>
+  </table>
+  <div id="event-form" class="event-form" style="display: none;">
+    <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+    <input type="text" id="event-name" placeholder="Event Name">
+    <input type="time" id="event-start-time" placeholder="Start Time">
+    <input type="time" id="event-end-time" placeholder="End Time">
+    <input type="color" id="event-color">
+    <textarea id="event-description" placeholder="Description"></textarea>
+    <button onclick="saveEvent()">Save</button>
+    <button onclick="discardEvent()">Discard</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- /index.html -->
+
+<!-- styles.css -->
+/* 9/26/23 rolled back to earlier draft */
+ 
+  * {
+    box-sizing: border-box;
+  }
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #4285f4;
+    color: white;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .calendar {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+  }
+  
+  .calendar th,
+  .calendar td {
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 14%;
+    height: 100px;
+    position: relative;
+  }
+  
+  .calendar th {
+    background-color: #f1f1f1;
+    padding: 10px;
+    background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
+  }
+  
+  .calendar .weekend {
+    background-color: #f9f9f9;
+  }
+  
+  .calendar td:hover {
+    background-color: rgba(66, 133, 244, 0.1);
+    cursor: pointer;
+  }
+  
+  .calendar td.active {
+    background-color: #4285f4;
+    color: white;
+  }
+
+  
+  
+  .event {
+    font-size: 12px;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    width: 100%;  /* Constrain width to cell */
+    overflow: hidden;  /* Hide overflow */
+    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+}
+
+  
+  .event * {
+    pointer-events: none;
+  }
+  .event:empty {
+    display: none;
+  }
+  
+
+  .calendar th .weekday-name {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+.day {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px;
+  margin: 0;
+}
+<!-- /styles.css -->
+
+<!-- script.js -->
+const events = {};  
+    const today = new Date();  
+    const currentYear = today.getFullYear();  
+    const currentMonth = today.getMonth();  
+
+  const fetchEvents = () => {
+      $.ajax({
+        url: "http://localhost:5000/get_events", // Added in the proper link for events cause I'm stupid lol
+        type: "GET",
+        success: function(response) {
+          console.log(response);
+          response.forEach(event => {
+            const day = event[0];
+            if (!events[day]) {
+              events[day] = [];
+            }
+            events[day].push({
+              name: event[1],
+              startTime: event[2],
+              endTime: event[3],
+              description: event[4],
+              color: event[5]
+            });
+          });
+          generateCalendar();
+        }
+      });
+    };
+
+    // Call fetchEvents function when the page loads
+    $(document).ready(function() {
+      fetchEvents();
+    });
+
+    const generateCalendar = (year = currentYear, month = currentMonth) => {  
+      const tbody = document.getElementById("calendar-body");  
+      tbody.innerHTML = "";  
+      const firstDay = new Date(year, month, 1).getDay();  
+      const daysInMonth = new Date(year, month + 1, 0).getDate();  
+      for (let i = 0; i < 5; i++) {  
+        const row = document.createElement("tr");  
+        for (let j = 0; j < 7; j++) {  
+          const cell = document.createElement("td");  
+          const currentDay = new Date(year, month, i * 7 + j - firstDay + 1).getDate();  
+          if ((i === 0 && j < firstDay) || currentDay > daysInMonth) {  
+            cell.innerHTML = "";  
+          } else {  
+            cell.innerHTML = `<div class="day">${currentDay}</div>`;  
+            cell.onclick = () => selectDate(currentDay);  
+            if (events[currentDay]) {  
+              events[currentDay].forEach((event, index) => {  
+                const eventDiv = document.createElement("div");  
+                eventDiv.className = "event";  
+                eventDiv.style.backgroundColor = event.color;  
+                eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;  
+                eventDiv.title = event.description;  
+                eventDiv.onclick = (e) => {  
+                  e.stopPropagation();  
+                  editEvent(currentDay, index);  
+                };  
+                cell.appendChild(eventDiv);  
+              });  
+            }  
+          }  
+          if (j === 0 || j === 6) {  
+            cell.classList.add("weekend");  
+          }  
+          row.appendChild(cell);  
+        }  
+        tbody.appendChild(row);  
+      }  
+      document.querySelector("h1").textContent = `Booking Calendar for ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;  
+    };  
+  
+    const generateWeekView = (day) => {  
+      const weekView = document.getElementById("week-view");  
+      weekView.innerHTML = "";  
+      for (let i = 0; i < 7; i++) {  
+        const dayDiv = document.createElement("div");  
+        dayDiv.className = "day";  
+        for (let j = 0; j < 24; j++) {  
+          const hourDiv = document.createElement("div");  
+          hourDiv.className = "hour";  
+          hourDiv.dataset.hour = `${j}:00`;  
+          dayDiv.appendChild(hourDiv);  
+        }  
+        weekView.appendChild(dayDiv);  
+      }  
+      weekView.style.display = "flex";  
+    };  
+
+    const selectDate = (day) => {  
+      document.getElementById('form-date').innerText = `${new Date(currentYear, currentMonth, day).toLocaleString('default', { month: 'long' })} ${day}, ${currentYear}`;  
+      document.getElementById('event-form').style.display = 'block';  
+      document.getElementById('event-form').dataset.day = day;  
+      document.getElementById('event-form').dataset.index = -1;  // For new events  
+      document.getElementById('form-title').textContent = 'Add Event';
+    generateWeekView(day);  
+  }; 
+  
+    
+
+    const editEvent = (day, index) => {  
+      const event = events[day][index];  
+      document.getElementById('form-date').innerText = `${new Date(currentYear, currentMonth, day).toLocaleString('default', { month: 'long' })} ${day}, ${currentYear}`;  
+      document.getElementById('event-form').style.display = 'block';  
+      document.getElementById('event-form').dataset.day = day;  
+      document.getElementById('event-form').dataset.index = index;  
+      document.getElementById('event-name').value = event.name;  
+      document.getElementById('event-start-time').value = event.startTime;  
+      document.getElementById('event-end-time').value = event.endTime;  
+      document.getElementById('event-color').value = event.color;  
+      document.getElementById('event-description').value = event.description;  
+      document.getElementById('form-title').textContent = 'Edit Event';
+  }; 
+    
+  
+  const saveEvent = () => {
+    console.log("Save button clicked");
+    const day = document.getElementById('event-form').dataset.day;
+    const name = document.getElementById('event-name').value;
+    const startTime = document.getElementById('event-start-time').value;
+    const endTime = document.getElementById('event-end-time').value;
+    const description = document.getElementById('event-description').value;
+    const color = document.getElementById('event-color').value;
+
+    $.ajax({
+      url: "http://localhost:5000/add_event",
+      type: "POST",
+      dataType: "json",
+      data: JSON.stringify({
+        day,
+        name,
+        startTime,
+        endTime,
+        description,
+        color,
+      }),
+      contentType: "application/json; charset=utf-8",
+      success: function (response) {
+        generateCalendar();
+        discardEvent();
+      },
+    });
+  };
+  
+    const discardEvent = () => {  
+      console.log("Discard button clicked");
+      document.getElementById('event-form').style.display = 'none';  
+      document.getElementById('event-name').value = 'Sample Event';  
+      document.getElementById('event-start-time').value = '12:00';  
+      document.getElementById('event-end-time').value = '13:00';  
+      document.getElementById('event-color').value = '#4285f4';  
+      document.getElementById('event-description').value = 'Sample Description';  
+    };  
+  
+
+      
+  // Call fetchEvents function when the page loads
+  $(document).ready(function() {
+    fetchEvents();
+  });
+
+  // Initialize the calendar
+  $(document).ready(function () {
+    generateCalendar();
+
+    $.ajax({
+      url: "http://localhost:5000/get_events",
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        response.forEach(function (event) {
+          if (!events[event[1]]) {
+            events[event[1]] = [];
+          }
+          events[event[1]].push({
+            name: event[2],
+            startTime: event[3],
+            endTime: event[4],
+            description: event[5],
+            color: event[6],
+          });
+        });
+        generateCalendar();
+      },
+    });
+  });
+<!-- /script.js -->
+
+<!-- eventdb.py -->
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/add_event', methods=['POST'])
+def add_event():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    data = request.json
+    day = data['day']
+    name = data['name']
+    startTime = data['startTime']
+    endTime = data['endTime']
+    description = data['description']
+    color = data['color']
+    
+    c.execute("INSERT INTO events (day, name, startTime, endTime, description, color) VALUES (?, ?, ?, ?, ?, ?)",
+              (day, name, startTime, endTime, description, color))
+    
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "success"})
+
+@app.route('/get_events', methods=['GET'])
+def get_events():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM events")
+    events = c.fetchall()
+    conn.close()
+    return jsonify(events)
+
+if __name__ == '__main__':
+    conn = sqlite3.connect('events.db', check_same_thread=False)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS events
+                 (day integer, name text, startTime text, endTime text, description text, color text)''')
+    conn.commit()
+    conn.close()
+    app.run(debug=True)
+<!-- /eventdb.py -->

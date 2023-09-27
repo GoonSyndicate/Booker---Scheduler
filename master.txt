@@ -1,3 +1,51 @@
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Booking Calendar</h1>
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+      <!-- Calendar will be populated here -->
+    </tbody>
+  </table>
+  <div id="event-form" class="event-form" style="display: none;">
+    <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+    <input type="text" id="event-name" placeholder="Event Name">
+    <input type="time" id="event-start-time" placeholder="Start Time">
+    <input type="time" id="event-end-time" placeholder="End Time">
+    <input type="color" id="event-color">
+    <textarea id="event-description" placeholder="Description"></textarea>
+    <button onclick="saveEvent()">Save</button>
+    <button onclick="discardEvent()">Discard</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- /index.html -->
+
+<!-- styles.css -->
+SASSAFRASs
+<!-- /styles.css -->
+
+<!-- script.js -->
 const events = {};  
     const today = new Date();  
     const currentYear = today.getFullYear();  
@@ -186,3 +234,50 @@ const events = {};
       },
     });
   });
+<!-- /script.js -->
+
+<!-- eventdb.py -->
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/add_event', methods=['POST'])
+def add_event():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    data = request.json
+    day = data['day']
+    name = data['name']
+    startTime = data['startTime']
+    endTime = data['endTime']
+    description = data['description']
+    color = data['color']
+    
+    c.execute("INSERT INTO events (day, name, startTime, endTime, description, color) VALUES (?, ?, ?, ?, ?, ?)",
+              (day, name, startTime, endTime, description, color))
+    
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "success"})
+
+@app.route('/get_events', methods=['GET'])
+def get_events():
+    conn = sqlite3.connect('events.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM events")
+    events = c.fetchall()
+    conn.close()
+    return jsonify(events)
+
+if __name__ == '__main__':
+    conn = sqlite3.connect('events.db', check_same_thread=False)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS events
+                 (day integer, name text, startTime text, endTime text, description text, color text)''')
+    conn.commit()
+    conn.close()
+    app.run(debug=True) BOOOTY
+<!-- /eventdb.py -->
