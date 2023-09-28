@@ -55,9 +55,9 @@ h1 {
 }
 
 .day {
-  position: absolute;
-  top: 5px;
-  left: 5px;
+  position: sticky;  /* Make it sticky */
+  top: 0;  /* Stick to the top */
+  background: white;  /* Background to overlay content */
   z-index: 2;
 }
 
