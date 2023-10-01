@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+
+.event-form{
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  z-index: 100;  
+  display: none;
+}
+
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
@@ -99,4 +113,32 @@ h1 {
 
 .event:hover {
   outline: 2px solid #4285f4;
+}
+
+.event:active {
+  outline: none;
+}
+
+.event.footer {
+  align-content: space-between;
+  min-height: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin: 4px;
+  font-size: 10px;
+}
+
+#current-day {
+  background: linear-gradient(to bottom, #5f9dff 0%, #0dd140 100%);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  height: 60px;
+  line-height: 62px;
+  font-size: 20px;
+  padding: 0 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

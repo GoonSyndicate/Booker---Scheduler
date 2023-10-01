@@ -104,12 +104,14 @@ const discardEvent = () => {
   form.style.display = "none";
 };
 
-const selectDate = (day) => {
+const selectDate = (day, event) => {
   const form = document.getElementById("event-form");
   form.dataset.id = null;
   form.dataset.day = day;
   form.dataset.index = null;
   document.getElementById("form-title").textContent = "Add Event";
+  form.style.left = `${event.pageX}px`;
+  form.style.top = `${event.pageY}px`;
   form.style.display = "block";
 };
 
@@ -137,7 +139,7 @@ const generateCalendar = (year = currentYear, month = currentMonth) => {
         dayDiv.className = "day";
         dayDiv.innerHTML = currentDay;
 
-        cellWrapper.onclick = () => selectDate(currentDay);
+        cellWrapper.onclick = (event) => selectDate(currentDay, event);
 
         cell.appendChild(dayDiv);
 
