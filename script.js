@@ -141,11 +141,17 @@ const generateCalendar = (year = currentYear, month = currentMonth) => {
 
         cellWrapper.onclick = (event) => selectDate(currentDay, event);
 
-        cell.appendChild(dayDiv);
-
         if (events[currentDay]) {
           events[currentDay].forEach((event, index) => {
             const eventDiv = document.createElement("div");
+            const tooltipDiv = document.createElement("div");
+            tooltipDiv.className = 'tooltip';
+            tooltipDiv.innerHTML = `
+              <strong>${event.name}</strong><br>
+              ${event.startTime} - ${event.endTime}<br>
+              ${event.description}
+            `;
+
             eventDiv.className = "event";
             eventDiv.style.backgroundColor = event.color;
             eventDiv.innerHTML = `${event.name} <span>${event.startTime} - ${event.endTime}</span>`;
@@ -156,9 +162,22 @@ const generateCalendar = (year = currentYear, month = currentMonth) => {
               editEvent(currentDay, index);
             };
 
+            eventDiv.onmouseover = (e) => {
+              tooltipDiv.style.left = `${e.pageX + 10}px`;
+              tooltipDiv.style.top = `${e.pageY + 10}px`;
+              tooltipDiv.style.display = 'block';
+            };
+
+            eventDiv.onmouseout = () => {
+              tooltipDiv.style.display = 'none';
+            };
+
             cellWrapper.appendChild(eventDiv);
+            cellWrapper.appendChild(tooltipDiv); // Add tooltip to the cell wrapper
           });
         }
+
+        cell.appendChild(dayDiv);
       }
 
       if (j === 0 || j === 6) {

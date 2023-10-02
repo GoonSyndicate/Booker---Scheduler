@@ -142,3 +142,17 @@ h1 {
   top: 0;
   left: 0;
 }
+
+/* Add this to your styles.css */
+.tooltip {
+  position: fixed;  /* Changed from absolute */
+  z-index: 101;  /* Ensure it's above other elements */
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  width: 200px;
+  display: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
