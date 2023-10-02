@@ -7,6 +7,31 @@
 </head>
 <body>
   <h1>Booking Calendar</h1>
+  
+  <!-- Navigation and Month/Year selection -->
+  <div id="calendar-nav">
+    <button onclick="prevMonth()">Previous</button>
+    <select id="month-select" onchange="changeMonth(this.value)">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5">June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </select>
+    <select id="year-select" onchange="changeYear(this.value)">
+      <!-- Years will be populated here -->
+    </select>
+    <button onclick="nextMonth()">Next</button>
+  </div>
+  
+  <!-- Calendar Table -->
   <table class="calendar">
     <thead>
       <tr>
@@ -23,6 +48,8 @@
       <!-- Calendar will be populated here -->
     </tbody>
   </table>
+  
+  <!-- Event Form -->
   <div id="event-form" class="event-form">
     <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
     <input type="text" id="event-name" placeholder="Event Name">
@@ -34,6 +61,8 @@
     <button onclick="saveEvent()">Save</button>
     <button onclick="discardEvent()">Discard</button>
   </div>
+  
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
 </body>

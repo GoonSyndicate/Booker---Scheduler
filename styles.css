@@ -6,7 +6,7 @@
 
 
 .event-form{
-  position: fixed;
+  position: absolute;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
