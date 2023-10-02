@@ -173,7 +173,7 @@ const generateCalendar = (year = currentYear, month = currentMonth) => {
             };
 
             cellWrapper.appendChild(eventDiv);
-            cellWrapper.appendChild(tooltipDiv); // Add tooltip to the cell wrapper
+            document.body.appendChild(tooltipDiv);  // Append tooltip to the body
           });
         }
 
@@ -196,6 +196,8 @@ const generateCalendar = (year = currentYear, month = currentMonth) => {
 
 
 $(document).ready(() => {
+  setTimeout(() => {
   fetchEvents();
   generateCalendar();
+}, 1000); // 1-second delay
 });
