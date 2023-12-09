@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Calendar</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+  <h1>Booking Calendar</h1>
+  
+  <!-- Navigation and Month/Year selection -->
+  <div id="calendar-nav">
+    <button onclick="prevMonth()">Previous</button>
+    <select id="month-select" onchange="changeMonth(this.value)">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5">June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </select>
+    <select id="year-select" onchange="changeYear(this.value)">
+      <!-- Years will be populated here -->
+    </select>
+    <button onclick="nextMonth()">Next</button>
+  </div>
+  
+  <!-- Calendar Table -->
+  <table class="calendar">  
+    <thead>  
+      <tr>  
+        <th class="weekend-header">Sun</th>  
+        <th>Mon</th>  
+        <th>Tue</th>  
+        <th>Wed</th>  
+        <th>Thu</th>  
+        <th>Fri</th>  
+        <th class="weekend-header">Sat</th>  
+      </tr>  
+    </thead>  
+    <tbody id="calendar-body">
+      <!-- Calendar will be populated here -->
+    </tbody>
+  </table>
+  
+  <!-- Event Form -->
+  <div id="event-form" class="event-form">
+    <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+    <input type="date" id="event-date" placeholder="Event Date">  <!-- New Date Field -->
+    <input type="text" id="event-name" placeholder="Event Name" maxlength="20">
+    <input type="time" id="event-start-time" placeholder="Start Time">
+    <input type="time" id="event-end-time" placeholder="End Time">
+    <!-- New Button for Booking -->
+    <button onclick="bookCraft()">Book a Craft</button>
+    <!-- Color options -->
+    <label for="event-color">Choose a color:</label><br>
+    <input type="radio" id="light-mint" name="event-color" value="#b2f3e0">
+    <label for="light-mint" style="color:#b2f3e0;">Light Mint</label><br>
+    <input type="radio" id="dark-teal" name="event-color" value="#36736d">
+    <label for="dark-teal" style="color:#36736d;">Dark Teal</label><br>
+    <input type="radio" id="soft-cream" name="event-color" value="#f9f4d6">
+    <label for="soft-cream" style="color:#f9f4d6;">Soft Cream</label><br>
+    <input type="radio" id="muted-coral" name="event-color" value="#ff6b6b">
+    <label for="muted-coral" style="color:#ff6b6b;">Muted Coral</label><br>
+    <input type="radio" id="warm-gray" name="event-color" value="#8d8d8d">
+    <label for="warm-gray" style="color:#8d8d8d;">Warm Gray</label><br>
+    <input type="radio" id="pale-blue" name="event-color" value="#a0d8f1">
+    <label for="pale-blue" style="color:#a0d8f1;">Pale Blue</label><br>
+    <textarea id="event-description" placeholder="Description"></textarea>
+    <button onclick="deleteEvent()">Delete</button>
+    <button onclick="saveEvent()">Save</button>
+    <button onclick="discardEvent()">Discard</button>
+  </div>
+  
+  <!-- Booking Form -->
+<div id="booking-form" class="event-form" style="display:none;">
+  <h2>Book a Craft for <span id="booking-form-date"></span></h2>
+  
+  <!-- Craft Selection -->
+  <label for="craft-type">Select Craft:</label>
+  <select id="craft-type">
+    <option value="tritoon">24' Bennington SVSR Tritoon</option>
+    <option value="waverunner">Waverunners</option>
+  </select>
+  
+  <!-- Pricing -->
+  <div id="pricing-info">
+    <!-- Pricing will be populated here based on craft selection -->
+  </div>
+  
+  <!-- Date Range -->
+  <label for="date-range">Date Range:</label>
+  <input type="text" id="start-date" placeholder="MM/DD/YY">
+  <span>to</span>
+  <input type="text" id="end-date" placeholder="MM/DD/YY">
+  
+  <!-- Number of Passengers -->
+  <label for="passenger-count">Number of Passengers:</label>
+  <input type="number" id="passenger-count">
+  
+  <!-- Additional Questions -->
+  <label for="can-text">Can we text you?:</label>
+  <select id="can-text">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+  
+  <label for="life-jacket-sizes">List life jacket sizes:</label>
+  <input type="text" id="life-jacket-sizes">
+  
+  <label for="additional-accessories">Additional Accessories:</label>
+  <select id="additional-accessories">
+    <!-- Accessories options here -->
+  </select>
+  
+  <!-- Payment and Checkout -->
+  <button onclick="confirmBooking()">Confirm</button>
+  <button onclick="discardBooking()">Discard</button>
+</div>
+
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>
