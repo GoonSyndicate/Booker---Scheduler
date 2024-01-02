@@ -1,0 +1,337 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
+import os
+
+# Initialize Flask application
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+# Initialize database
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+# Initialize login manager
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+# Import blueprints and models after initializing app to avoid circular imports
+from .models import User
+from .auth import auth as auth_blueprint
+from .main import main as main_blueprint
+
+# Register blueprints
+app.register_blueprint(auth_blueprint)
+app.register_blueprint(main_blueprint)
+
+# Flask-Login user loader
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+from flask import Blueprint, render_template, redirect, url_for, request
+from flask_login import login_user, logout_user, current_user, login_required
+from werkzeug.security import generate_password_hash, check_password_hash
+from app import db
+from models import User
+from forms import LoginForm, SignupForm
+
+auth = Blueprint('auth', __name__)
+
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.hashed_password, form.password.data):
+            login_user(user)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('main.home'))
+        else:
+            return render_template('login.html', form=form, error='Invalid username or password')
+
+    return render_template('login.html', form=form)
+
+@auth.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+
+    form = SignupForm()
+    if form.validate_on_submit():
+        existing_user = User.query.filter_by(username=form.username.data).first()
+        if existing_user:
+            return render_template('signup.html', form=form, error='Username already exists')
+
+        hashed_password = generate_password_hash(form.password.data)
+        new_user = User(username=form.username.data, hashed_password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('auth.login'))
+
+    return render_template('signup.html', form=form)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
+
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateTimeField, TextAreaField
+from wtforms.validators import DataRequired, EqualTo, Length
+from wtforms.fields.html5 import DateField
+from models import Craft, Event
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Log In')
+
+class SignupForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=80)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+class BookingForm(FlaskForm):
+    craft = SelectField('Craft', choices=[(c.id, c.name) for c in Craft.query.all()], coerce=int)
+    date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
+    start_time = DateTimeField('Start Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    end_time = DateTimeField('End Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    submit = SubmitField('Book')
+
+class EventForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    start_date = DateTimeField('Start Date & Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    end_date = DateTimeField('End Date & Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    color = StringField('Color')
+    location = StringField('Location (Optional)')
+    submit = SubmitField('Create Event')
+
+
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_required
+from models import Event
+from app import db
+from sqlalchemy.sql import extract
+from datetime import datetime
+
+main = Blueprint('main', __name__)
+
+@main.route('/')
+@login_required
+def home():
+    # Add content for the homepage
+    return render_template('index.html')
+
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
+@main.route('/reservations')
+@login_required
+def reservations():
+    # Example: Retrieve and pass reservations data to the template
+    # reservations = Reservation.query.all()
+    return render_template('reservations.html')  # , reservations=reservations
+
+@main.route('/calendar')
+@login_required
+def calendar():
+    # Get the current year and month
+    today = datetime.today()
+    year = today.year
+    month = today.month
+
+    # Query events for the current month and year
+    events = Event.query.filter(
+        extract('year', Event.start_date) == year,
+        extract('month', Event.start_date) == month
+    ).all()
+
+    return render_template('calendar.html', events=events)
+
+@main.route('/reviews')
+@login_required
+def reviews():
+    return render_template('reviews.html')
+
+@main.route('/reports')
+@login_required
+def reports():
+    return render_template('reports.html')
+
+@main.route('/setup_business')
+@login_required
+def setup_business():
+    return render_template('setup_business.html')
+
+@main.route('/setup_products')
+@login_required
+def setup_products():
+    return render_template('setup_products.html')
+
+@main.route('/online_bookings')
+@login_required
+def online_bookings():
+    return render_template('online_bookings.html')
+
+@main.route('/help_resources')
+@login_required
+def help_resources():
+    return render_template('help_resources.html')
+
+
+from app import db
+from datetime import datetime
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    end_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Event('{self.title}', '{self.start_date}', '{self.end_date}')"
+
+class Business(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    address = db.Column(db.String(120))
+    phone = db.Column(db.String(20))
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    hashed_password = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(120), unique=True)
+    role = db.Column(db.String(80))
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    business_id = db.Column(db.Integer, db.ForeignKey('business.id'))
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    start_datetime = db.Column(db.String(80), nullable=False)
+    end_datetime = db.Column(db.String(80), nullable=False)
+    status = db.Column(db.String(50))
+    payment_details = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Reservation('{self.event_id}')"
+
+class Customer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    contact_details = db.Column(db.String(120))
+    address = db.Column(db.String(120))
+
+class Availability(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    date = db.Column(db.String(80), nullable=False)
+    number_of_units = db.Column(db.Integer)
+    reserved_units = db.Column(db.Integer)
+    available_units = db.Column(db.Integer)
+
+class Maintenance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    start_datetime = db.Column(db.String(80), nullable=False)
+    end_datetime = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+
+class Craft(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    max_availability = db.Column(db.Integer)  # Maximum units available for booking
+    current_availability = db.Column(db.Integer)  # Currently available units
+
+    def __repr__(self):
+        return f"Craft('{self.name}', Available: {self.current_availability}/{self.max_availability})"
+
+
+from models import Event, Reservation, Craft
+from app import db
+from datetime import datetime
+
+def check_event_conflict(new_event):
+    """ Check for any conflicts with the given event. """
+    conflicting_events = Event.query.filter(
+        (Event.start_date <= new_event.end_date) & (Event.end_date >= new_event.start_date)
+    ).all()
+
+    return bool(conflicting_events)
+
+def create_event(title, description, start_date, end_date, color, location=None):
+    """ Create a new event. """
+    new_event = Event(title=title, description=description, start_date=start_date, end_date=end_date, color=color, location=location)
+    
+    if not check_event_conflict(new_event):
+        db.session.add(new_event)
+        db.session.commit()
+        return new_event
+    else:
+        return None
+
+def check_craft_availability(craft_id, start_time, end_time):
+    """ Check if the craft is available in the given time range. """
+    overlapping_reservations = Reservation.query.filter(
+        Reservation.craft_id == craft_id,
+        (Reservation.start_datetime < end_time) & (Reservation.end_datetime > start_time)
+    ).all()
+
+    craft = Craft.query.get(craft_id)
+    if craft and overlapping_reservations.count() < craft.current_availability:
+        return True
+    return False
+
+def create_reservation(craft_id, customer_id, start_time, end_time):
+    """ Create a new reservation for a craft. """
+    if check_craft_availability(craft_id, start_time, end_time):
+        new_reservation = Reservation(craft_id=craft_id, customer_id=customer_id, start_datetime=start_time, end_datetime=end_time)
+        db.session.add(new_reservation)
+        db.session.commit()
+        return new_reservation
+    else:
+        return None
+
+def update_craft_availability(craft_id, delta):
+    """ Update the availability of a craft. """
+    craft = Craft.query.get(craft_id)
+    if craft:
+        craft.current_availability += delta
+        db.session.commit()
+
+def cancel_reservation(reservation_id):
+    """ Cancel a reservation and update craft availability. """
+    reservation = Reservation.query.get(reservation_id)
+    if reservation:
+        update_craft_availability(reservation.craft_id, 1)
+        db.session.delete(reservation)
+        db.session.commit()
+
+

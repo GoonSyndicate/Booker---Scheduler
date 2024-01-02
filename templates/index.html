@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Logo and User Info -->
+        <img src="logo.png" alt="Company Logo">
+        <div class="user-info">
+            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home" class="active">Dashboard</a>
+        <a href="calendar">Calendar</a>
+        <a href="reservations">Reservations</a>
+        <a href="reports">Reports</a>
+        <a href="setup_business">Setup Business</a>
+        <a href="setup_products">Setup Products</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to Your Dashboard</h1>
+
+        <!-- User Information -->
+        <div class="user-section">
+            <h2>User Information</h2>
+            <p>Name: <b>Employee Name</b></p>
+            <p>Role: <b>User Role</b></p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <h2>Quick Links</h2>
+            <a href="calendar">View Calendar</a>
+            <a href="reservations">Manage Reservations</a>
+            <a href="reports">Generate Reports</a>
+            <a href="setup_business">Setup Business</a>
+            <a href="setup_products">Manage Products</a>
+        </div>
+
+        <!-- Key Statistics -->
+        <div class="statistics">
+            <h2>Key Statistics</h2>
+            <p>Total Reservations: <b>100</b></p>
+            <p>Revenue (Month): <b>$10,000</b></p>
+            <!-- Add more statistics as needed -->
+        </div>
+
+        <!-- Notifications -->
+        <div class="notifications">
+            <h2>Notifications</h2>
+            <p>No new notifications.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <!-- Footer content -->
+        © 2022 Your Company Name
+    </div>
+</body>
+</html>

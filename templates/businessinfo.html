@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Information</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/businessinfo.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Logo and User Info -->
+        <img src="logo.png" alt="Company Logo">
+        <div class="user-info">
+            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home">Home</a>
+        <a href="frontdesk">Frontdesk</a>
+        <a href="setup" class="active">Setup</a>
+        <a href="website">Website</a>
+        <a href="admin">Administration</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Setup Business</h1>
+        <form action="submit_business_info" method="post">
+            <label for="name">Business Name:</label>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address"><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone"><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email"><br>
+
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website"><br>
+
+            <input type="submit" value="Save and Continue">
+        </form>
+    </div>
+
+    <div class="footer">
+        <!-- Footer content -->
+        © 2022 Your Company Name
+    </div>
+</body>
+</html>
