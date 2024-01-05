@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make a Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Make a Reservation</h1>
+    <form action="{{ url_for('main.make_reservation') }}" method="post" class="reservation-form">
+        {{ form.hidden_tag() }}
+
+        <div class="form-section">
+            <h2>Customer Information</h2>
+            {{ form.first_name.label(class='form-label') }} {{ form.first_name(class='form-input') }}
+            {{ form.last_name.label(class='form-label') }} {{ form.last_name(class='form-input') }}
+            {{ form.company_name.label(class='form-label') }} {{ form.company_name(class='form-input') }}
+            {{ form.address.label(class='form-label') }} {{ form.address(class='form-input') }}
+            {{ form.city.label(class='form-label') }} {{ form.city(class='form-input') }}
+            {{ form.state.label(class='form-label') }} {{ form.state(class='form-input') }}
+            {{ form.zip_code.label(class='form-label') }} {{ form.zip_code(class='form-input') }}
+            {{ form.country.label(class='form-label') }} {{ form.country(class='form-input') }}
+            {{ form.phone_number.label(class='form-label') }} {{ form.phone_number(class='form-input') }}
+            {{ form.email_address.label(class='form-label') }} {{ form.email_address(class='form-input') }}
+            {{ form.tax_exempt.label(class='form-label') }} {{ form.tax_exempt(class='form-checkbox') }}
+            {{ form.discount_code.label(class='form-label') }} {{ form.discount_code(class='form-input') }}
+            {{ form.emergency_contact_number.label(class='form-label') }} {{ form.emergency_contact_number(class='form-input') }}
+        </div>
+
+        <div class="form-section">
+            <h2>Reservation Details</h2>
+            {{ form.craft.label(class='form-label') }} {{ form.craft(class='form-input') }}
+            {{ form.date.label(class='form-label') }} {{ form.date(class='form-input') }}
+            {{ form.start_time.label(class='form-label') }} {{ form.start_time(class='form-input') }}
+            {{ form.end_time.label(class='form-label') }} {{ form.end_time(class='form-input') }}
+        </div>
+
+        <div class="form-section">
+            <h2>Additional Requests</h2>
+            <!-- Add any additional request fields here -->
+        </div>
+
+        <div class="form-section">
+            <h2>Office Notes</h2>
+            <!-- Add office notes field here -->
+        </div>
+
+        <input type="submit" value="Submit Reservation" class="form-submit-button">
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2242 @@
+
+
+##############################
+#    css/businessinfo.css    #
+##############################
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .header {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: left;
+  }
+  
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .main-content {
+    margin: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+  }
+  
+  .main-content h1 {
+    color: #333;
+  }
+  
+  .main-content form {
+    margin-top: 20px;
+  }
+  
+  .main-content label {
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+  }
+  
+  .main-content input[type="text"],
+  .main-content input[type="email"],
+  .main-content input[type="url"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .main-content input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .main-content input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+
+
+
+##########################
+#    css/calendar.css    #
+##########################
+
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    margin: 20px;
+}
+
+.calendar {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Style for day cells from previous month */
+.prev-month-day {
+    color: #ccc; /* Light gray text color */
+}
+
+/* Style for day cells from next month */
+.next-month-day {
+    color: #ccc; /* Light gray text color */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.calendar-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 80px; /* Set a fixed width for each day cell */
+    height: 80px; /* Set a fixed height for each day cell */
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add hover animation */
+}
+
+table td {
+    text-align: right;
+    vertical-align: top;
+    padding: 10px;
+}
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#calendar-body td {
+    cursor: pointer;
+}
+
+/* Add hover effect for day cells */
+table td:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+
+#event-form {
+    display: none;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#event-form h2 {
+    margin: 0;
+    color: #333;
+}
+
+#event-form input[type="text"],
+#event-form input[type="time"],
+#event-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#event-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
+###########################
+#    css/dashboard.css    #
+###########################
+
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.header {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header img {
+    max-width: 100px;
+    height: auto;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-info b {
+    color: #4CAF50;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.main-content {
+    margin: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.user-section {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.user-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.quick-links h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.quick-links a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    flex: 1;
+    max-width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.quick-links a:hover {
+    background-color: #45a049;
+}
+
+.statistics {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.statistics h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.statistics p {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.notifications {
+    margin-bottom: 20px;
+}
+
+.notifications h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
+#######################
+#    css/login.css    #
+#######################
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.login-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.login-container form .form-group {
+    margin-bottom: 15px;
+}
+
+.login-container form .form-group label {
+    display: block;
+    color: #333;
+}
+
+.login-container form .form-group input[type="text"],
+.login-container form .form-group input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container form .form-group input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container form .form-group input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.login-container .link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container .link-container a {
+    color: #333;
+    text-decoration: none;
+}
+
+
+
+
+########################
+#    css/logout.css    #
+########################
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.logout-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.logout-container p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.logout-container .login-link {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-container .login-link:hover {
+    background-color: #45a049;
+}
+
+
+
+
+########################
+#    css/signup.css    #
+########################
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.create-account-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-account-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.create-account-container form .form-group {
+    margin-bottom: 15px;
+}
+
+.create-account-container form .form-group label {
+    display: block;
+    color: #333;
+}
+
+.create-account-container form .form-group input[type="text"],
+.create-account-container form .form-group input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.create-account-container form .form-group input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-account-container form .form-group input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+
+########################
+#    css/styles.css    #
+########################
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-section h2 {
+  border-bottom: 1px solid #888888;
+  padding-bottom: 5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.reservation-form .form-label {
+  display: block;
+  margin-top: 10px;
+}
+
+.reservation-form .form-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.reservation-form .form-checkbox {
+  margin-top: 5px;
+}
+
+.form-submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-submit-button:hover {
+  background-color: #45a049;
+}
+
+/* Additional styles for the page */
+
+.header {
+  background-color: #333;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header img {
+  max-width: 100px;
+  height: auto;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-info b {
+  color: #4CAF50;
+}
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.main-content {
+  margin: 15px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.user-section {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.user-section h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.quick-links h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.quick-links a {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  flex: 1;
+  max-width: calc(33.33% - 20px);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.quick-links a:hover {
+  background-color: #45a049;
+}
+
+.statistics {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.statistics h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.statistics p {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.notifications {
+  margin-bottom: 20px;
+}
+
+.notifications h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
+######################
+#    js/script.js    #
+######################
+
+$(document).ready(function() {
+  // Function to generate the calendar grid
+  function generateCalendar(year, month) {
+    const calendarBody = document.getElementById('calendar-body');
+    const currentMonthYear = document.getElementById('current-month-year');
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDay = firstDay.getDay();
+    
+    // Clear the calendar
+    calendarBody.innerHTML = '';
+
+    // Set the month and year in the header
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    currentMonthYear.textContent = `${monthNames[month]} ${year}`;
+
+    // Create the calendar grid
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement('tr');
+      for (let j = 0; j < 7; j++) {
+        if (i === 0 && j < startingDay) {
+          const cell = document.createElement('td');
+          const prevMonthDay = new Date(year, month, 0 - (startingDay - j));
+          cell.textContent = prevMonthDay.getDate();
+          cell.classList.add('prev-month-day');
+          row.appendChild(cell);
+        } else if (date > daysInMonth) {
+          const cell = document.createElement('td');
+          const nextMonthDay = new Date(year, month + 1, date - daysInMonth);
+          cell.textContent = nextMonthDay.getDate();
+          cell.classList.add('next-month-day');
+          row.appendChild(cell);
+          date++;
+        } else {
+          const cell = document.createElement('td');
+          const dayNumber = document.createElement('span');
+          dayNumber.textContent = date;
+          cell.appendChild(dayNumber);
+          row.appendChild(cell);
+          date++;
+        }
+      }
+      calendarBody.appendChild(row);
+    }
+  }
+
+  // Initial calendar generation for the current month
+  const currentDate = new Date();
+  generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+  // Handle previous month button click
+  $('#prev-month').on('click', function() {
+    const currentMonth = currentDate.getMonth();
+    currentDate.setMonth(currentMonth - 1);
+    generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+  });
+
+  // Handle next month button click
+  $('#next-month').on('click', function() {
+    const currentMonth = currentDate.getMonth();
+    currentDate.setMonth(currentMonth + 1);
+    generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+  });
+
+  // Handle day cell hover effect
+  $('#calendar-body td').hover(
+    function() {
+      $(this).css('background-color', '#45a049');
+      $(this).css('color', 'white');
+    },
+    function() {
+      $(this).css('background-color', '');
+      $(this).css('color', '');
+    }
+  );
+
+  // Handle day cell click event to open the event form
+  $('#calendar-body td').click(function() {
+    const clickedDate = parseInt($(this).text());
+
+    if (!isNaN(clickedDate)) {
+      const currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), clickedDate);
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      $('#form-date').text(formattedDate);
+      $('#event-form').show();
+    }
+  });
+
+  // Handle save event button click to add and display events
+  $('#save-event').click(function() {
+    const eventName = $('#event-name').val();
+    const startTime = $('#event-start-time').val();
+    const endTime = $('#event-end-time').val();
+    const eventColor = $('#event-color').val();
+    const eventDescription = $('#event-description').val();
+    const eventDate = $('#form-date').text();
+
+    // Create an event object with the data
+    const event = {
+      name: eventName,
+      startTime: startTime,
+      endTime: endTime,
+      color: eventColor,
+      description: eventDescription
+    };
+
+    // Send the event data to the server to store in the database
+    $.ajax({
+      type: 'POST',
+      url: '/add_event', // Define a Flask route for adding events
+      data: JSON.stringify(event),
+      contentType: 'application/json',
+      success: function(response) {
+        // Display the event in the calendar (example: change cell background color)
+        $(`td:contains(${eventDate})`).css('background-color', event.color);
+        
+        // Hide the event form
+        $('#event-form').hide();
+      },
+      error: function(error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+
+});
+
+
+
+
+#####################
+#    favicon.ico    #
+#####################
+
+
+
+
+
+###########################
+#    businessinfo.html    #
+###########################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Information</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/businessinfo.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Logo and User Info -->
+        <img src="logo.png" alt="Company Logo">
+        <div class="user-info">
+            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home">Home</a>
+        <a href="frontdesk">Frontdesk</a>
+        <a href="setup" class="active">Setup</a>
+        <a href="website">Website</a>
+        <a href="admin">Administration</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Setup Business</h1>
+        <form action="submit_business_info" method="post">
+            <label for="name">Business Name:</label>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address"><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone"><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email"><br>
+
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website"><br>
+
+            <input type="submit" value="Save and Continue">
+        </form>
+    </div>
+
+    <div class="footer">
+        <!-- Footer content -->
+        © 2022 Your Company Name
+    </div>
+</body>
+</html>
+
+
+
+
+#######################
+#    calendar.html    #
+#######################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Calendar</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/calendar.css">
+</head>
+<body>
+    <header>
+        <h1>Booking Calendar</h1>
+    </header>
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home">Dashboard</a>
+        <a href="calendar" class="active">Calendar</a>
+        <a href="{{ url_for('main.make_reservation') }}">Make Reservation</a>
+        <a href="{{ url_for('main.view_reservations') }}">View Reservations</a>
+        <a href="reports">Reports</a>
+        <a href="setup_business">Setup Business</a>
+        <a href="setup_products">Setup Products</a>
+    </div>
+    <main>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prev-month">Previous</button>
+                <h2 id="current-month-year">Month Year</h2>
+                <button id="next-month">Next</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                    <!-- Calendar will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="event-form" class="event-form" style="display: none;">
+          <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+          <input type="text" id="event-name" placeholder="Event Name">
+          <input type="time" id="event-start-time" placeholder="Start Time">
+          <input type="time" id="event-end-time" placeholder="End Time">
+          <input type="color" id="event-color">
+          <textarea id="event-description" placeholder="Description"></textarea>
+          <button id="delete-event">Delete</button>
+          <button id="save-event">Save</button>
+          <button id="discard-event">Discard</button>
+      </div>
+
+        <div id="event-form" class="event-form">
+            <h2><span id="form-title">Add/Edit Event</span> for <span id="form-date"></span></h2>
+            <input type="text" id="event-name" placeholder="Event Name">
+            <input type="time" id="event-start-time" placeholder="Start Time">
+            <input type="time" id="event-end-time" placeholder="End Time">
+            <input type="color" id="event-color">
+            <textarea id="event-description" placeholder="Description"></textarea>
+            <button id="delete-event">Delete</button>
+            <button id="save-event">Save</button>
+            <button id="discard-event">Discard</button>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        © 2022 Your Company Name
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
+
+
+
+
+###############################
+#    edit_reservation.html    #
+###############################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Edit Reservation #{{ reservation_id }}</h1>
+    <form action="{{ url_for('main.edit_reservation', reservation_id=reservation_id) }}" method="post" class="reservation-form">
+        {{ form.hidden_tag() }}
+
+        <!-- Include all the form fields as in make_reservation.html, pre-filled with the reservation data -->
+
+        <input type="submit" value="Update Reservation" class="form-submit-button">
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+#############################
+#    help_resources.html    #
+#############################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help and Resources</title>
+</head>
+<body>
+    <h1>Welcome to Help and Resources Page</h1>
+</body>
+</html>
+
+
+
+
+####################
+#    index.html    #
+####################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+</head>
+<body>
+    <div class="header">
+        <!-- Logo and User Info -->
+        <img src="logo.png" alt="Company Logo">
+        <div class="user-info">
+            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home" class="active">Dashboard</a>
+        <a href="calendar">Calendar</a>
+        <a href="{{ url_for('main.make_reservation') }}">Make Reservation</a>
+        <a href="{{ url_for('main.view_reservations') }}">View Reservations</a>
+        <a href="reports">Reports</a>
+        <a href="setup_business">Setup Business</a>
+        <a href="setup_products">Setup Products</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to Your Dashboard</h1>
+
+        <!-- User Information -->
+        <div class="user-section">
+            <h2>User Information</h2>
+            <p>Name: <b>Employee Name</b></p>
+            <p>Role: <b>User Role</b></p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <h2>Quick Links</h2>
+            <a href="calendar">View Calendar</a>
+            <a href="reservations">Manage Reservations</a>
+            <a href="reports">Generate Reports</a>
+            <a href="setup_business">Setup Business</a>
+            <a href="setup_products">Manage Products</a>
+        </div>
+
+        <!-- Key Statistics -->
+        <div class="statistics">
+            <h2>Key Statistics</h2>
+            <p>Total Reservations: <b>100</b></p>
+            <p>Revenue (Month): <b>$10,000</b></p>
+            <!-- Add more statistics as needed -->
+        </div>
+
+        <!-- Notifications -->
+        <div class="notifications">
+            <h2>Notifications</h2>
+            <p>No new notifications.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <!-- Footer content -->
+        © 2022 Your Company Name
+    </div>
+</body>
+</html>
+
+
+
+
+####################
+#    login.html    #
+####################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form action="{{ url_for('auth.login') }}" method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", required=True) }}
+            {% for error in form.username.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", required=True) }}
+            {% for error in form.password.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+        
+        <div class="link-container">
+            Don't have an account? <a href="{{ url_for('auth.signup') }}">Create one</a>.
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
+
+
+
+
+#####################
+#    logout.html    #
+#####################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/logout.css">
+</head>
+<body>
+
+<div class="logout-container">
+    <h2>Logout</h2>
+    <p>You have been successfully logged out.</p>
+    <a href="login" class="login-link">Log in again</a>
+</div>
+
+</body>
+</html>
+
+
+
+
+###############################
+#    make_reservation.html    #
+###############################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make a Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Make a Reservation</h1>
+    <form action="{{ url_for('main.make_reservation') }}" method="post" class="reservation-form">
+        {{ form.hidden_tag() }}
+
+        <div class="form-section">
+            <h2>Customer Information</h2>
+            {{ form.first_name.label(class='form-label') }} {{ form.first_name(class='form-input') }}
+            {{ form.last_name.label(class='form-label') }} {{ form.last_name(class='form-input') }}
+            {{ form.company_name.label(class='form-label') }} {{ form.company_name(class='form-input') }}
+            {{ form.address.label(class='form-label') }} {{ form.address(class='form-input') }}
+            {{ form.city.label(class='form-label') }} {{ form.city(class='form-input') }}
+            {{ form.state.label(class='form-label') }} {{ form.state(class='form-input') }}
+            {{ form.zip_code.label(class='form-label') }} {{ form.zip_code(class='form-input') }}
+            {{ form.country.label(class='form-label') }} {{ form.country(class='form-input') }}
+            {{ form.phone_number.label(class='form-label') }} {{ form.phone_number(class='form-input') }}
+            {{ form.email_address.label(class='form-label') }} {{ form.email_address(class='form-input') }}
+            {{ form.tax_exempt.label(class='form-label') }} {{ form.tax_exempt(class='form-checkbox') }}
+            {{ form.discount_code.label(class='form-label') }} {{ form.discount_code(class='form-input') }}
+            {{ form.emergency_contact_number.label(class='form-label') }} {{ form.emergency_contact_number(class='form-input') }}
+        </div>
+
+        <div class="form-section">
+            <h2>Reservation Details</h2>
+            {{ form.craft.label(class='form-label') }} {{ form.craft(class='form-input') }}
+            {{ form.date.label(class='form-label') }} {{ form.date(class='form-input') }}
+            {{ form.start_time.label(class='form-label') }} {{ form.start_time(class='form-input') }}
+            {{ form.end_time.label(class='form-label') }} {{ form.end_time(class='form-input') }}
+        </div>
+
+        <div class="form-section">
+            <h2>Additional Requests</h2>
+            <!-- Add any additional request fields here -->
+        </div>
+
+        <div class="form-section">
+            <h2>Office Notes</h2>
+            <!-- Add office notes field here -->
+        </div>
+
+        <input type="submit" value="Submit Reservation" class="form-submit-button">
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+##############################
+#    online_bookings.html    #
+##############################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Bookings</title>
+</head>
+<body>
+    <h1>Welcome to Online Bookings Page</h1>
+</body>
+</html>
+
+
+
+
+######################
+#    reports.html    #
+######################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports</title>
+</head>
+<body>
+    <h1>Welcome to Reports Page</h1>
+</body>
+</html>
+
+
+
+
+######################
+#    reviews.html    #
+######################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reviews</title>
+</head>
+<body>
+    <h1>Welcome to Reviews Page</h1>
+</body>
+</html>
+
+
+
+
+#############################
+#    setup_business.html    #
+#############################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setup Business</title>
+</head>
+<body>
+    <h1>Welcome to Setup Business Page</h1>
+</body>
+</html>
+
+
+
+
+#############################
+#    setup_products.html    #
+#############################
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setup Products</title>
+</head>
+<body>
+    <h1>Welcome to Setup Products Page</h1>
+</body>
+</html>
+
+
+
+
+#####################
+#    signup.html    #
+#####################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+<body>
+
+<div class="create-account-container">
+    <h2>Create Account</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('auth.signup') }}" method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", required=True) }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", required=True) }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.confirm_password.label(class="form-label") }}
+            {{ form.confirm_password(class="form-control", required=True) }}
+            {% if form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+
+#######################
+#    userinfo.html    #
+#######################
+
+
+
+
+
+###############################
+#    view_reservation.html    #
+###############################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Reservations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>View Reservations</h1>
+    <table class="reservations-table">
+        <thead>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Customer Name</th>
+                <th>Craft</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.customer.first_name }} {{ reservation.customer.last_name }}</td>
+                <td>{{ reservation.craft.name }}</td>
+                <td>{{ reservation.start_datetime }}</td>
+                <td>{{ reservation.end_datetime }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>
+                    <a href="{{ url_for('main.edit_reservation', reservation_id=reservation.id) }}">Edit</a> |
+                    <form action="{{ url_for('reservations.cancel_reservation', reservation_id=reservation.id) }}" method="post" class="inline-form">
+                        <input type="submit" value="Cancel" class="link-button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+
+
+################
+#    app.py    #
+################
+
+from flask import Flask
+from extensions import db, migrate, login_manager, ckeditor
+from sqlalchemy.sql import text  # Import text for raw SQL execution
+
+def create_app():
+    """Application factory function"""
+    app = Flask(__name__)
+
+    # Configure the app for development with SQLite and a simple secret key
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+    app.config['SECRET_KEY'] = 'dev'
+
+    # Initialize extensions with app context
+    db.init_app(app)
+    migrate.init_app(app, db)
+    login_manager.init_app(app)
+    ckeditor.init_app(app)
+
+    with app.app_context():
+        # Import models here to avoid circular imports
+        from models import User
+        try:
+            db.session.execute(text('SELECT 1'))
+            db.session.commit()
+            print('Connected to the database.')
+        except Exception as e:
+            print('Failed to connect to the database.')
+            print(f'Exception: {e}')
+
+        # Create all tables in the database which don't exist yet
+        db.create_all()
+
+    login_manager.login_view = 'auth.login'
+
+    # Import and register blueprints
+    from auth import auth as auth_blueprint
+    from main import main as main_blueprint
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(main_blueprint)
+
+    # Flask-Login user loader
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)
+
+
+
+
+#################
+#    auth.py    #
+#################
+
+from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask_login import login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+from app import db
+from models import User, Customer, Reservation, Craft
+from forms import LoginForm, SignupForm, BookingForm
+
+auth = Blueprint('auth', __name__)
+
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.hashed_password, form.password.data):
+            login_user(user)
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Invalid username or password', 'error')
+    return render_template('login.html', form=form)
+
+@auth.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        hashed_password = generate_password_hash('password')
+        new_user = User(username=form.username.data, hashed_password=hashed_password)
+        db.session.add(new_user)
+        try:
+            db.session.commit()
+            flash('Account created successfully!', 'success')
+            return redirect(url_for('auth.login'))
+        except Exception as e:
+            db.session.rollback()
+            flash(str(e), 'error')
+    return render_template('signup.html', form=form)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
+
+@auth.route('/make_reservation', methods=['GET', 'POST'])
+@login_required
+def make_reservation():
+    form = BookingForm()
+    if form.validate_on_submit():
+        customer = Customer(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            company_name=form.company_name.data,
+            address=form.address.data,
+            city=form.city.data,
+            state=form.state.data,
+            zip_code=form.zip_code.data,
+            country=form.country.data,
+            phone_number=form.phone_number.data,
+            email_address=form.email_address.data,
+            tax_exempt=form.tax_exempt.data,
+            discount_code=form.discount_code.data,
+            emergency_contact_number=form.emergency_contact_number.data
+        )
+        db.session.add(customer)
+        db.session.commit()
+
+        reservation = Reservation(
+            product_id=form.craft.data,
+            customer_id=customer.id,
+            start_datetime=form.start_time.data,
+            end_datetime=form.end_time.data,
+            status='New'  # or any default status you want to set
+        )
+        db.session.add(reservation)
+        db.session.commit()
+
+        flash('Reservation created successfully!', 'success')
+        return redirect(url_for('auth.view_reservation'))
+    return render_template('make_reservation.html', form=form)
+
+@auth.route('/view_reservations', methods=['GET'])
+@login_required
+def view_reservations():
+    all_reservations = Reservation.query.all()
+    return render_template('view_reservations.html', reservations=all_reservations)
+
+@auth.route('/edit_reservation/<int:reservation_id>', methods=['GET', 'POST'])
+@login_required
+def edit_reservation(reservation_id):
+    reservation = Reservation.query.get_or_404(reservation_id)
+    form = BookingForm(obj=reservation)
+    if form.validate_on_submit():
+        reservation.product_id = form.craft.data
+        reservation.start_datetime = form.start_time.data
+        reservation.end_datetime = form.end_time.data
+        # Update customer details as well
+        customer = Customer.query.get_or_404(reservation.customer_id)
+        customer.first_name = form.first_name.data
+        customer.last_name = form.last_name.data
+        # ... update other customer fields ...
+        db.session.commit()
+        flash('Reservation updated successfully!', 'success')
+        return redirect(url_for('auth.view_reservations'))
+    return render_template('edit_reservation.html', form=form, reservation_id=reservation_id)
+
+@auth.route('/cancel_reservation/<int:reservation_id>', methods=['POST'])
+@login_required
+def cancel_reservation(reservation_id):
+    reservation = Reservation.query.get_or_404(reservation_id)
+    db.session.delete(reservation)
+    db.session.commit()
+    flash('Reservation cancelled successfully!', 'success')
+    return redirect(url_for('auth.view_reservations'))
+
+
+
+#######################
+#    extensions.py    #
+#######################
+
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
+from flask_ckeditor import CKEditor
+
+# Initialize extensions
+db = SQLAlchemy()
+migrate = Migrate()
+login_manager = LoginManager()
+ckeditor = CKEditor()
+
+
+
+
+##################
+#    forms.py    #
+##################
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateTimeField, TextAreaField, BooleanField
+from wtforms.validators import DataRequired, EqualTo, Length, Optional, Email
+from wtforms.fields.html5 import DateField
+
+# LoginForm: Used for user authentication
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Log In')
+
+# SignupForm: Used for user registration
+class SignupForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=80)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+# BookingForm: Used for booking crafts and collecting customer information
+class BookingForm(FlaskForm):
+    # Craft selection
+    craft = SelectField('Craft', coerce=int, validators=[DataRequired()])
+    date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
+    start_time = DateTimeField('Start Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    end_time = DateTimeField('End Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+
+    # Customer information fields
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    company_name = StringField('Company Name', validators=[Optional()])
+    address = StringField('Address', validators=[DataRequired()])
+    city = StringField('City', validators=[DataRequired()])
+    state = StringField('State', validators=[DataRequired()])
+    zip_code = StringField('Zip/Postal Code', validators=[DataRequired()])
+    country = SelectField('Country', validators=[DataRequired()])  # You'll need to populate the choices for this field
+    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    email_address = StringField('Email Address', validators=[DataRequired(), Email()])
+    tax_exempt = BooleanField('Tax Exempt')
+    discount_code = StringField('Discount/Gift Card Code', validators=[Optional()])
+    emergency_contact_number = StringField('Emergency Contact Number', validators=[Optional()])
+
+    # Additional fields as necessary
+
+    submit = SubmitField('Book')
+
+    def __init__(self, *args, **kwargs):
+        super(BookingForm, self).__init__(*args, **kwargs)
+        # Delayed import and query to avoid application context errors
+        from models import Craft  # Import here to avoid circular import
+        # Populate the 'craft' choices when the form is instantiated
+        self.craft.choices = [(c.id, c.name) for c in Craft.query.all()]
+        # Populate the 'country' choices
+        self.country.choices = [('USA', 'United States'), ('CAN', 'Canada')]  # Add more countries as needed
+
+# EventForm: Used for creating and managing events
+class EventForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description')
+    start_date = DateTimeField('Start Date & Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    end_date = DateTimeField('End Date & Time', format='%Y-%m-%d %H:%M', validators=[DataRequired()])
+    color = StringField('Color')
+    location = StringField('Location (Optional)')
+    submit = SubmitField('Create Event')
+
+
+
+#################
+#    main.py    #
+#################
+
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_required
+from models import Event
+from app import db
+from sqlalchemy.sql import extract
+from datetime import datetime
+from forms import BookingForm
+
+main = Blueprint('main', __name__)
+
+@main.route('/')
+@login_required
+def home():
+    # Add content for the homepage
+    return render_template('index.html')
+
+
+@main.route('/make_reservation', methods=['GET', 'POST'])
+@login_required
+def make_reservation():
+    form = BookingForm()
+    if form.validate_on_submit():
+        customer = Customer(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            company_name=form.company_name.data,
+            address=form.address.data,
+            city=form.city.data,
+            state=form.state.data,
+            zip_code=form.zip_code.data,
+            country=form.country.data,
+            phone_number=form.phone_number.data,
+            email_address=form.email_address.data,
+            tax_exempt=form.tax_exempt.data,
+            discount_code=form.discount_code.data,
+            emergency_contact_number=form.emergency_contact_number.data
+        )
+        db.session.add(customer)
+        db.session.commit()
+
+        reservation = Reservation(
+            product_id=form.craft.data,
+            customer_id=customer.id,
+            start_datetime=form.start_time.data,
+            end_datetime=form.end_time.data,
+            status='New'  # or any default status you want to set
+        )
+        db.session.add(reservation)
+        db.session.commit()
+
+        flash('Reservation created successfully!', 'success')
+        return redirect(url_for('auth.view_reservation'))
+    return render_template('make_reservation.html', form=form)
+
+@main.route('/view_reservations', methods=['GET'])
+@login_required
+def view_reservations():
+    all_reservations = Reservation.query.all()
+    return render_template('view_reservations.html', reservations=all_reservations)
+
+@main.route('/edit_reservation/<int:reservation_id>', methods=['GET', 'POST'])
+@login_required
+def edit_reservation(reservation_id):
+    reservation = Reservation.query.get_or_404(reservation_id)
+    form = BookingForm(obj=reservation)
+    if form.validate_on_submit():
+        reservation.product_id = form.craft.data
+        reservation.start_datetime = form.start_time.data
+        reservation.end_datetime = form.end_time.data
+        # Update customer details as well
+        customer = Customer.query.get_or_404(reservation.customer_id)
+        customer.first_name = form.first_name.data
+        customer.last_name = form.last_name.data
+        # ... update other customer fields ...
+        db.session.commit()
+        flash('Reservation updated successfully!', 'success')
+        return redirect(url_for('auth.view_reservations'))
+    return render_template('edit_reservation.html', form=form, reservation_id=reservation_id)
+
+@main.route('/cancel_reservation/<int:reservation_id>', methods=['POST'])
+@login_required
+def cancel_reservation(reservation_id):
+    reservation = Reservation.query.get_or_404(reservation_id)
+    db.session.delete(reservation)
+    db.session.commit()
+    flash('Reservation cancelled successfully!', 'success')
+    return redirect(url_for('auth.view_reservations'))
+
+@main.route('/calendar')
+@login_required
+def calendar():
+    # Get the current year and month
+    today = datetime.today()
+    year = today.year
+    month = today.month
+
+    # Query events for the current month and year
+    events = Event.query.filter(
+        extract('year', Event.start_date) == year,
+        extract('month', Event.start_date) == month
+    ).all()
+
+    return render_template('calendar.html', events=events)
+
+@main.route('/reviews')
+@login_required
+def reviews():
+    return render_template('reviews.html')
+
+@main.route('/reports')
+@login_required
+def reports():
+    return render_template('reports.html')
+
+@main.route('/setup_business')
+@login_required
+def setup_business():
+    return render_template('setup_business.html')
+
+@main.route('/setup_products')
+@login_required
+def setup_products():
+    return render_template('setup_products.html')
+
+
+
+@main.route('/help_resources')
+@login_required
+def help_resources():
+    return render_template('help_resources.html')
+
+
+
+
+###################
+#    models.py    #
+###################
+
+from extensions import db
+from datetime import datetime
+from flask_login import UserMixin
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    end_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Event('{self.title}', '{self.start_date}', '{self.end_date}')"
+
+class Business(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    address = db.Column(db.String(120))
+    phone = db.Column(db.String(20))
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    hashed_password = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(120), unique=True)
+    role = db.Column(db.String(80))
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=True)
+    customer = db.relationship('Customer', backref='user', lazy=True) 
+    @property
+    def is_active(self):
+        """Consider all users to be active."""
+        return True
+    
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    business_id = db.Column(db.Integer, db.ForeignKey('business.id'))
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    start_datetime = db.Column(db.String(80), nullable=False)
+    end_datetime = db.Column(db.String(80), nullable=False)
+    status = db.Column(db.String(50))
+    payment_details = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Reservation('{self.event_id}')"
+
+class ReservationRate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'), nullable=False)
+    item_description = db.Column(db.String(255))
+    amount = db.Column(db.Float, nullable=False)
+
+class RateCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
+    display_to_customers = db.Column(db.Boolean, default=True)
+    # Additional fields as necessary
+
+class RateList(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
+    valid_from = db.Column(db.DateTime, nullable=False)
+    valid_to = db.Column(db.DateTime, nullable=False)
+    # Relationships
+    rates = db.relationship('Rate', backref='rate_list', lazy=True)
+
+class Rate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    rate_list_id = db.Column(db.Integer, db.ForeignKey('rate_list.id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('rate_category.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    # Additional fields as necessary
+
+class AdditionalCharge(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(255), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    # Additional fields as necessary
+
+class Customer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    company_name = db.Column(db.String(120), nullable=True)
+    address = db.Column(db.String(120), nullable=False)
+    city = db.Column(db.String(80), nullable=False)
+    state = db.Column(db.String(80), nullable=False)
+    zip_code = db.Column(db.String(20), nullable=False)
+    country = db.Column(db.String(80), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
+    email_address = db.Column(db.String(120), nullable=False)
+    tax_exempt = db.Column(db.Boolean, default=False)
+    discount_code = db.Column(db.String(80), nullable=True)
+    emergency_contact_number = db.Column(db.String(20), nullable=True)
+
+class Availability(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    date = db.Column(db.String(80), nullable=False)
+    number_of_units = db.Column(db.Integer)
+    reserved_units = db.Column(db.Integer)
+    available_units = db.Column(db.Integer)
+
+class Maintenance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    start_datetime = db.Column(db.String(80), nullable=False)
+    end_datetime = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+
+class Craft(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    max_availability = db.Column(db.Integer)  # Maximum units available for booking
+    current_availability = db.Column(db.Integer)  # Currently available units
+    reservation_type = db.Column(db.String(50))  # Daily, Hourly, etc.
+    pictures = db.relationship('Picture', backref='craft', lazy=True)
+    reservation_rules = db.relationship('ReservationRule', back_populates='craft', lazy=True)
+    units = db.relationship('Unit', backref='craft', lazy=True)
+    # Additional fields as necessary
+
+    def __repr__(self):
+        return f"Craft('{self.name}', Available: {self.current_availability}/{self.max_availability})"
+
+class Picture(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    craft_id = db.Column(db.Integer, db.ForeignKey('craft.id'), nullable=False)
+    image_url = db.Column(db.String(255))  # URL to the image
+
+class ReservationRule(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    craft_id = db.Column(db.Integer, db.ForeignKey('craft.id'), nullable=False)
+    rule_description = db.Column(db.Text)  # Description of the rule
+    craft = db.relationship('Craft', back_populates='reservation_rules')
+    
+class Unit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    craft_id = db.Column(db.Integer, db.ForeignKey('craft.id'), nullable=False)
+    name = db.Column(db.String(80))  # Name or number of the unit
+    
+    # Additional fields as necessary
+
+class CustomerInfoField(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    field_name = db.Column(db.String(80), nullable=False)
+    field_type = db.Column(db.String(50))  # Text, Checkbox, etc.
+    required = db.Column(db.Boolean, default=False)
+    # Additional fields as necessary
+
+
+
+
+################
+#    run.py    #
+################
+
+# run.py
+from app import create_app
+
+app = create_app()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+##################
+#    utils.py    #
+##################
+
+from models import Event, Reservation, Craft
+from app import db
+from datetime import datetime
+
+def check_event_conflict(new_event):
+    """ Check for any conflicts with the given event. """
+    conflicting_events = Event.query.filter(
+        (Event.start_date <= new_event.end_date) & (Event.end_date >= new_event.start_date)
+    ).all()
+
+    return bool(conflicting_events)
+
+def create_event(title, description, start_date, end_date, color, location=None):
+    """ Create a new event. """
+    new_event = Event(title=title, description=description, start_date=start_date, end_date=end_date, color=color, location=location)
+    
+    if not check_event_conflict(new_event):
+        db.session.add(new_event)
+        db.session.commit()
+        return new_event
+    else:
+        return None
+
+def check_craft_availability(craft_id, start_time, end_time):
+    """ Check if the craft is available in the given time range. """
+    overlapping_reservations = Reservation.query.filter(
+        Reservation.craft_id == craft_id,
+        (Reservation.start_datetime < end_time) & (Reservation.end_datetime > start_time)
+    ).all()
+
+    craft = Craft.query.get(craft_id)
+    if craft and overlapping_reservations.count() < craft.current_availability:
+        return True
+    return False
+
+def create_reservation(craft_id, customer_id, start_time, end_time):
+    """ Create a new reservation for a craft. """
+    if check_craft_availability(craft_id, start_time, end_time):
+        new_reservation = Reservation(craft_id=craft_id, customer_id=customer_id, start_datetime=start_time, end_datetime=end_time)
+        db.session.add(new_reservation)
+        db.session.commit()
+        return new_reservation
+    else:
+        return None
+
+def update_craft_availability(craft_id, delta):
+    """ Update the availability of a craft. """
+    craft = Craft.query.get(craft_id)
+    if craft:
+        craft.current_availability += delta
+        db.session.commit()
+
+def cancel_reservation(reservation_id):
+    """ Cancel a reservation and update craft availability. """
+    reservation = Reservation.query.get(reservation_id)
+    if reservation:
+        update_craft_availability(reservation.craft_id, 1)
+        db.session.delete(reservation)
+        db.session.commit()
+
+

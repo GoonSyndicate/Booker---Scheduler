@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Edit Reservation #{{ reservation_id }}</h1>
+    <form action="{{ url_for('main.edit_reservation', reservation_id=reservation_id) }}" method="post" class="reservation-form">
+        {{ form.hidden_tag() }}
+
+        <!-- Include all the form fields as in make_reservation.html, pre-filled with the reservation data -->
+
+        <input type="submit" value="Update Reservation" class="form-submit-button">
+    </form>
+</div>
+
+</body>
+</html>

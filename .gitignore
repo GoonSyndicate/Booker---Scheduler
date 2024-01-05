@@ -6,7 +6,6 @@ master.txt
 .pytest_cache
 master.txt
 myenv
-instance
 rollback
 OmniDEV
 __pycache__

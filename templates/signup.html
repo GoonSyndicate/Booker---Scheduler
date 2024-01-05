@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/signup.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signup.css') }}">
 </head>
 <body>
 
 <div class="create-account-container">
     <h2>Create Account</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <form action="{{ url_for('auth.signup') }}" method="post">
+        {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="new_username">Username:</label>
-            <input type="text" id="new_username" name="new_username" required>
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", required=True) }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
         </div>
         
         <div class="form-group">
-            <label for="new_password">Password:</label>
-            <input type="password" id="new_password" name="new_password" required>
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", required=True) }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
         </div>
         
         <div class="form-group">
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+            {{ form.confirm_password.label(class="form-label") }}
+            {{ form.confirm_password(class="form-control", required=True) }}
+            {% if form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
         </div>
         
         <div class="form-group">
-            <input type="submit" value="Create Account">
+            {{ form.submit(class="btn btn-primary") }}
         </div>
     </form>
 </div>

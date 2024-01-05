@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
 </head>
@@ -12,7 +12,7 @@
         <!-- Logo and User Info -->
         <img src="logo.png" alt="Company Logo">
         <div class="user-info">
-            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('logout') }}">Logout</a>
+            Logged in as: <b>Employee Name</b> | <a href="{{ url_for('auth.logout') }}">Logout</a>
         </div>
     </div>
 
@@ -20,7 +20,8 @@
         <!-- Navigation Links -->
         <a href="home" class="active">Dashboard</a>
         <a href="calendar">Calendar</a>
-        <a href="reservations">Reservations</a>
+        <a href="{{ url_for('main.make_reservation') }}">Make Reservation</a>
+        <a href="{{ url_for('main.view_reservations') }}">View Reservations</a>
         <a href="reports">Reports</a>
         <a href="setup_business">Setup Business</a>
         <a href="setup_products">Setup Products</a>

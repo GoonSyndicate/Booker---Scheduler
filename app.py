@@ -1,34 +1,35 @@
-# app.py
-import os
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from flask_ckeditor import CKEditor
-from dotenv import load_dotenv
-
-# Initialize extensions
-db = SQLAlchemy()
-migrate = Migrate()
-login_manager = LoginManager()
-ckeditor = CKEditor()
+from extensions import db, migrate, login_manager, ckeditor
+from sqlalchemy.sql import text  # Import text for raw SQL execution
 
 def create_app():
     """Application factory function"""
     app = Flask(__name__)
 
-    # Load environment variables
-    load_dotenv()
-
-    # Configure the app
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+    # Configure the app for development with SQLite and a simple secret key
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+    app.config['SECRET_KEY'] = 'dev'
 
     # Initialize extensions with app context
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
     ckeditor.init_app(app)
+
+    with app.app_context():
+        # Import models here to avoid circular imports
+        from models import User
+        try:
+            db.session.execute(text('SELECT 1'))
+            db.session.commit()
+            print('Connected to the database.')
+        except Exception as e:
+            print('Failed to connect to the database.')
+            print(f'Exception: {e}')
+
+        # Create all tables in the database which don't exist yet
+        db.create_all()
+
     login_manager.login_view = 'auth.login'
 
     # Import and register blueprints
@@ -37,12 +38,13 @@ def create_app():
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
 
-    # Import models
-    from models import User  # Now this should work without circular import
-
     # Flask-Login user loader
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
     return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)

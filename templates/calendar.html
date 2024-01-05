@@ -9,7 +9,16 @@
     <header>
         <h1>Booking Calendar</h1>
     </header>
-
+    <div class="navbar">
+        <!-- Navigation Links -->
+        <a href="home">Dashboard</a>
+        <a href="calendar" class="active">Calendar</a>
+        <a href="{{ url_for('main.make_reservation') }}">Make Reservation</a>
+        <a href="{{ url_for('main.view_reservations') }}">View Reservations</a>
+        <a href="reports">Reports</a>
+        <a href="setup_business">Setup Business</a>
+        <a href="setup_products">Setup Products</a>
+    </div>
     <main>
         <div class="calendar">
             <div class="calendar-header">
