@@ -26,11 +26,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(80))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=True)
     customer = db.relationship('Customer', backref='user', lazy=True) 
-    @property
-    def is_active(self):
-        """Consider all users to be active."""
-        return True
-    
+
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)

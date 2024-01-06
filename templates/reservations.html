@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make a Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Include any other CSS files needed -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Make a Reservation</h1>
+    <form action="{{ url_for('make_reservation') }}" method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="form-section">
+            <h2>Customer Information</h2>
+            {{ form.first_name.label }} {{ form.first_name(size=20) }}<br>
+            {{ form.last_name.label }} {{ form.last_name(size=20) }}<br>
+            {{ form.company_name.label }} {{ form.company_name(size=20) }}<br>
+            {{ form.address.label }} {{ form.address(size=20) }}<br>
+            {{ form.city.label }} {{ form.city(size=20) }}<br>
+            {{ form.state.label }} {{ form.state() }}<br>
+            {{ form.zip_code.label }} {{ form.zip_code(size=20) }}<br>
+            {{ form.country.label }} {{ form.country() }}<br>
+            {{ form.phone_number.label }} {{ form.phone_number(size=20) }}<br>
+            {{ form.email_address.label }} {{ form.email_address(size=20) }}<br>
+            {{ form.tax_exempt.label }} {{ form.tax_exempt() }}<br>
+            {{ form.discount_code.label }} {{ form.discount_code(size=20) }}<br>
+            {{ form.emergency_contact_number.label }} {{ form.emergency_contact_number(size=20) }}<br>
+        </div>
+
+        <div class="form-section">
+            <h2>Reservation Details</h2>
+            {{ form.craft.label }} {{ form.craft() }}<br>
+            {{ form.date.label }} {{ form.date() }}<br>
+            {{ form.start_time.label }} {{ form.start_time() }}<br>
+            {{ form.end_time.label }} {{ form.end_time() }}<br>
+        </div>
+
+        <div class="form-section">
+            <h2>Additional Requests</h2>
+            <!-- Add any additional request fields here -->
+        </div>
+
+        <div class="form-section">
+            <h2>Office Notes</h2>
+            <!-- Add office notes field here -->
+        </div>
+
+        <input type="submit" value="Submit Reservation">
+    </form>
+</div>
+
+</body>
+</html>
