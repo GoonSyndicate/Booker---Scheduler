@@ -14,43 +14,48 @@ def home():
     # Add content for the homepage
     return render_template('index.html')
 
-
 @main.route('/make_reservation', methods=['GET', 'POST'])
 @login_required
 def make_reservation():
     form = BookingForm()
     if form.validate_on_submit():
-        customer = Customer(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            company_name=form.company_name.data,
-            address=form.address.data,
-            city=form.city.data,
-            state=form.state.data,
-            zip_code=form.zip_code.data,
-            country=form.country.data,
-            phone_number=form.phone_number.data,
-            email_address=form.email_address.data,
-            tax_exempt=form.tax_exempt.data,
-            discount_code=form.discount_code.data,
-            emergency_contact_number=form.emergency_contact_number.data
-        )
-        db.session.add(customer)
-        db.session.commit()
+        try:
+            customer = Customer(
+                first_name=form.first_name.data,
+                last_name=form.last_name.data,
+                company_name=form.company_name.data,
+                address=form.address.data,
+                city=form.city.data,
+                state=form.state.data,
+                zip_code=form.zip_code.data,
+                country=form.country.data,
+                phone_number=form.phone_number.data,
+                email_address=form.email_address.data,
+                tax_exempt=form.tax_exempt.data,
+                discount_code=form.discount_code.data,
+                emergency_contact_number=form.emergency_contact_number.data
+            )
+            db.session.add(customer)
+            db.session.flush()  # Assign an ID to the customer without committing the transaction
 
-        reservation = Reservation(
-            product_id=form.craft.data,
-            customer_id=customer.id,
-            start_datetime=form.start_time.data,
-            end_datetime=form.end_time.data,
-            status='New'  # or any default status you want to set
-        )
-        db.session.add(reservation)
-        db.session.commit()
+            reservation = Reservation(
+                product_id=form.craft.data,
+                customer_id=customer.id,
+                start_datetime=form.start_time.data,
+                end_datetime=form.end_time.data,
+                status='New'  # or any default status you want to set
+            )
+            db.session.add(reservation)
+            db.session.commit()
 
-        flash('Reservation created successfully!', 'success')
-        return redirect(url_for('auth.view_reservation'))
+            flash('Reservation created successfully!', 'success')
+            return redirect(url_for('main.view_reservation'))
+        except Exception as e:
+            db.session.rollback()  # Rollback the session in case of error
+            current_app.logger.error(f'Error creating reservation: {e}', exc_info=True)
+            flash('An error occurred while creating the reservation. Please try again.', 'error')
     return render_template('make_reservation.html', form=form)
+
 
 @main.route('/view_reservations', methods=['GET'])
 @login_required
@@ -74,7 +79,7 @@ def edit_reservation(reservation_id):
         # ... update other customer fields ...
         db.session.commit()
         flash('Reservation updated successfully!', 'success')
-        return redirect(url_for('auth.view_reservations'))
+        return redirect(url_for('main.view_reservations'))
     return render_template('edit_reservation.html', form=form, reservation_id=reservation_id)
 
 @main.route('/cancel_reservation/<int:reservation_id>', methods=['POST'])
@@ -84,7 +89,7 @@ def cancel_reservation(reservation_id):
     db.session.delete(reservation)
     db.session.commit()
     flash('Reservation cancelled successfully!', 'success')
-    return redirect(url_for('auth.view_reservations'))
+    return redirect(url_for('main.view_reservations'))
 
 @main.route('/calendar')
 @login_required

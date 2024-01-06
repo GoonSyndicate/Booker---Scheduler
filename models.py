@@ -71,11 +71,13 @@ class RateList(db.Model):
 
 class Rate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rate_list_id = db.Column(db.Integer, db.ForeignKey('rate_list.id'), nullable=False)
+    # Set rate_list_id as nullable
+    rate_list_id = db.Column(db.Integer, db.ForeignKey('rate_list.id'), nullable=True)
     category_id = db.Column(db.Integer, db.ForeignKey('rate_category.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     amount = db.Column(db.Float, nullable=False)
     # Additional fields as necessary
+
 
 class AdditionalCharge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
